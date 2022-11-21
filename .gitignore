@@ -1,0 +1,5 @@
+.idea
+venv
+__pycache__/
+ads/__pycache__/
+homework_29/__pycache__/
