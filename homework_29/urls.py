@@ -17,8 +17,9 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import SimpleRouter
 
-from ads.views.cats_views import CategoriesViewSet
-from ads.views.locs_views import LocationsViewSet
+from basics.views.cats_views import CategoriesViewSet
+from basics.views.locs_views import LocationsViewSet
+
 
 router = SimpleRouter()
 router.register('locations', LocationsViewSet)
@@ -28,6 +29,7 @@ router.register('categories', CategoriesViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
-    path('', include('homework_29.urls_paths.ads_urls')),
-    path('', include('homework_29.urls_paths.users_urls')),
+    path('ads/', include('homework_29.urls_paths.ads_urls')),
+    path('user/', include('homework_29.urls_paths.users_urls')),
+    path('selection/', include('homework_29.urls_paths.selections_urls'))
 ] + router.urls

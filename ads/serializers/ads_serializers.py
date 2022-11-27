@@ -1,7 +1,7 @@
 from rest_framework.serializers import ModelSerializer, SlugRelatedField, IntegerField
 from ads.models import Ad
-from ads.serializers.cats_serializer import CategoriesSerializer
-from ads.serializers.users_serializer import UsersRetrieveSerializer
+from basics.serializers.cats_serializer import CategoriesSerializer
+from authentication.serializers.users_serializer import UsersRetrieveSerializer
 
 
 class AdsListSerializer(ModelSerializer):

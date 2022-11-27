@@ -1,8 +1,7 @@
-from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
 
-from ads.models import Category
-from ads.serializers.cats_serializer import CategoriesSerializer
+from basics.models import Category
+from basics.serializers.cats_serializer import CategoriesSerializer
 
 
 class CategoriesViewSet(ModelViewSet):

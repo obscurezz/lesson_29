@@ -1,8 +1,9 @@
-from django.shortcuts import render
-from rest_framework.generics import ListAPIView, RetrieveAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView, UpdateAPIView, DestroyAPIView
+from rest_framework.permissions import IsAuthenticated
 
 from ads.models import Ad
-from ads.serializers.ads_serializers import AdsListSerializer, AdsRetrieveSerializer
+from ads.permissions import CreatedByPrivilegedUserPermission
+from ads.serializers.ads_serializers import AdsListSerializer, AdsRetrieveSerializer, AdsCUDSerializer
 
 
 class AdsListView(ListAPIView):
@@ -40,3 +41,22 @@ class AdsListView(ListAPIView):
 class AdsRetrieveView(RetrieveAPIView):
     queryset = Ad.objects.all()
     serializer_class = AdsRetrieveSerializer
+    permission_classes = [IsAuthenticated]
+
+
+class AdsCreateView(CreateAPIView):
+    queryset = Ad.objects.all()
+    serializer_class = AdsCUDSerializer
+    permission_classes = [IsAuthenticated]
+
+
+class AdsUpdateView(UpdateAPIView):
+    queryset = Ad.objects.all()
+    serializer_class = AdsCUDSerializer
+    permission_classes = [IsAuthenticated, CreatedByPrivilegedUserPermission]
+
+
+class AdsDeleteView(DestroyAPIView):
+    queryset = Ad.objects.all()
+    serializer_class = AdsCUDSerializer
+    permission_classes = [IsAuthenticated, CreatedByPrivilegedUserPermission]

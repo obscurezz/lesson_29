@@ -1,8 +1,8 @@
-from django.shortcuts import render
 from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView, UpdateAPIView, DestroyAPIView
 
-from ads.models import User
-from ads.serializers.users_serializer import UsersListSerializer, UsersRetrieveSerializer, UsersCUDSerializer
+from authentication.models import User
+from authentication.serializers.users_serializer import UsersListSerializer, UsersRetrieveSerializer, \
+    UsersCreateSerializer, UsersDeleteUpdateSerializer
 
 
 class UsersListView(ListAPIView):
@@ -17,14 +17,14 @@ class UsersRetrieveView(RetrieveAPIView):
 
 class UsersCreateView(CreateAPIView):
     queryset = User.objects.all()
-    serializer_class = UsersCUDSerializer
+    serializer_class = UsersCreateSerializer
 
 
 class UsersUpdateView(UpdateAPIView):
     queryset = User.objects.all()
-    serializer_class = UsersCUDSerializer
+    serializer_class = UsersDeleteUpdateSerializer
 
 
 class UsersDestroyView(DestroyAPIView):
     queryset = User.objects.all()
-    serializer_class = UsersCUDSerializer
+    serializer_class = UsersDeleteUpdateSerializer
