@@ -16,13 +16,13 @@ class SelectionsListView(ListAPIView):
 class SelectionsRetrieveView(RetrieveAPIView):
     queryset = Selection.objects.all()
     serializer_class = SelectionsDetailSerializer
-    permission_classes = [IsAuthenticated, SelectionOwnerPermission, IsAdminUser]
+    permission_classes = [IsAuthenticated, SelectionOwnerPermission]
 
 
 class SelectionsCreateView(CreateAPIView):
     queryset = Selection.objects.all()
     serializer_class = SelectionsCreateSerializer
-    permission_classes = [IsAuthenticated, SelectionOwnerPermission, IsAdminUser]
+    permission_classes = [IsAuthenticated]
 
 
 class SelectionsUpdateView(UpdateAPIView):

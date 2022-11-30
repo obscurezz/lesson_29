@@ -1,3 +1,4 @@
+from django.core.validators import MinValueValidator, MinLengthValidator
 from django.db import models
 from base_model import BaseModel
 from authentication.models import User
@@ -5,12 +6,12 @@ from basics.models import Category
 
 
 class Ad(BaseModel):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, null=False, validators=[MinLengthValidator(10)])
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    price = models.PositiveIntegerField(default=0)
-    description = models.CharField(max_length=4000)
-    is_published = models.BooleanField(default=True)
-    image = models.ImageField(upload_to='logos/', default='logos/logo.png')
+    price = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0)])
+    description = models.CharField(max_length=4000, null=True, blank=True)
+    is_published = models.BooleanField(default=False)
+    image = models.ImageField(null=True, upload_to='logos/', default='logos/logo.png')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
 
     @property

@@ -1,5 +1,6 @@
-from rest_framework.serializers import ModelSerializer, SlugRelatedField, IntegerField
+from rest_framework.serializers import ModelSerializer, SlugRelatedField, IntegerField, DateField, CharField
 from authentication.models import User
+from authentication.validators import MinAgeValidator, CheckEmailNotDomainValidator
 from basics.serializers.locs_serializer import LocationsSerializer
 
 
@@ -21,6 +22,8 @@ class UsersRetrieveSerializer(ModelSerializer):
 
 class UsersCreateSerializer(ModelSerializer):
     id = IntegerField(required=False)
+    birth_date = DateField(validators=[MinAgeValidator(9)])
+    email = CharField(required=False, validators=[CheckEmailNotDomainValidator('rambler.ru')])
 
     class Meta:
         model = User

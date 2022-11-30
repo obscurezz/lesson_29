@@ -1,4 +1,4 @@
-from rest_framework.relations import PrimaryKeyRelatedField
+from rest_framework.relations import PrimaryKeyRelatedField, SlugRelatedField
 from rest_framework.serializers import ModelSerializer, IntegerField
 
 from ads.models import Selection
@@ -6,12 +6,14 @@ from ads.serializers.ads_serializers import AdsListSerializer
 
 
 class SelectionsListSerializer(ModelSerializer):
+
     class Meta:
         model = Selection
         exclude = ['owner']
 
 
 class SelectionsDetailSerializer(ModelSerializer):
+    owner = SlugRelatedField(slug_field='username', read_only=True)
     items = AdsListSerializer(many=True)
 
     class Meta:

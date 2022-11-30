@@ -5,3 +5,4 @@ ads/__pycache__/
 homework_29/__pycache__/
 authentication/__pycache__/
 basics/__pycache__
+.pytest_cache

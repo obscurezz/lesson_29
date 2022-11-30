@@ -1,3 +1,4 @@
+from django.core.validators import MinValueValidator
 from django.db import models
 from base_model import BaseModel
 
@@ -14,6 +15,7 @@ class Location(BaseModel):
 
 class Category(BaseModel):
     name = models.CharField(max_length=100, unique=True)
+    slug = models.CharField(max_length=10, unique=True, validators=[MinValueValidator(5)], null=True)
 
     class Meta:
         verbose_name = "Категория"

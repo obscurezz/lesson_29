@@ -21,3 +21,7 @@
 
 > By price range: ?price_from= ?price_to=
 ***
+### Tests
+
+`python -m pytest -vv tests/`
+***

@@ -3,7 +3,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from ads.models import Ad
 from ads.permissions import CreatedByPrivilegedUserPermission
-from ads.serializers.ads_serializers import AdsListSerializer, AdsRetrieveSerializer, AdsCUDSerializer
+from ads.serializers.ads_serializers import AdsListSerializer, AdsRetrieveSerializer, AdsCreateSerializer, AdsDeleteUpdateSerializer
 
 
 class AdsListView(ListAPIView):
@@ -46,17 +46,17 @@ class AdsRetrieveView(RetrieveAPIView):
 
 class AdsCreateView(CreateAPIView):
     queryset = Ad.objects.all()
-    serializer_class = AdsCUDSerializer
+    serializer_class = AdsCreateSerializer
     permission_classes = [IsAuthenticated]
 
 
 class AdsUpdateView(UpdateAPIView):
     queryset = Ad.objects.all()
-    serializer_class = AdsCUDSerializer
+    serializer_class = AdsDeleteUpdateSerializer
     permission_classes = [IsAuthenticated, CreatedByPrivilegedUserPermission]
 
 
 class AdsDeleteView(DestroyAPIView):
     queryset = Ad.objects.all()
-    serializer_class = AdsCUDSerializer
+    serializer_class = AdsDeleteUpdateSerializer
     permission_classes = [IsAuthenticated, CreatedByPrivilegedUserPermission]

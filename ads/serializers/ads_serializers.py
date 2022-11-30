@@ -1,5 +1,6 @@
-from rest_framework.serializers import ModelSerializer, SlugRelatedField, IntegerField
+from rest_framework.serializers import ModelSerializer, SlugRelatedField, IntegerField, BooleanField
 from ads.models import Ad
+from ads.validators import IsPublishedNotTrueValidator
 from basics.serializers.cats_serializer import CategoriesSerializer
 from authentication.serializers.users_serializer import UsersRetrieveSerializer
 
@@ -22,10 +23,18 @@ class AdsRetrieveSerializer(ModelSerializer):
         fields = '__all__'
 
 
-class AdsCUDSerializer(ModelSerializer):
+class AdsCreateSerializer(ModelSerializer):
     id = IntegerField(required=False)
+    is_published = BooleanField(required=False, default=False, validators=[IsPublishedNotTrueValidator()])
 
     class Meta:
         model = Ad
         exclude = ['author', 'category']
 
+
+class AdsDeleteUpdateSerializer(ModelSerializer):
+    id = IntegerField(required=False)
+
+    class Meta:
+        model = Ad
+        exclude = ['author', 'category']
